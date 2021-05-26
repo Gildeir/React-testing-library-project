@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import App from '../App';
@@ -27,17 +26,34 @@ test('shows the Pokédex when the route is `/`', () => {
 
 // Teste se o topo da aplicação contém um conjunto fixo de links de navegação.
 // O primeiro link deve possuir o texto Home.
+test('test the text `home`', () => {
+  const { getByText } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
+  const home = getByText(/Home/i);
+  expect(home).toBeInTheDocument();
+});
+
 // O segundo link deve possuir o texto About.
+test('test the text `about`', () => {
+  const { getByText } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
+  const about = getByText(/About/i);
+  expect(about).toBeInTheDocument();
+});
+
 // O terceiro link deve possuir o texto Favorite Pokémons.
-
-// Teste se a aplicação é redirecionada para a página inicial, na URL / ao clicar no link Home da barra de navegação.
-
-// Teste se a aplicação é redirecionada para a página de About, na URL / about, ao clicar no link About da barra de navegação.
-
-// Teste se a aplicação é redirecionada para a página de Pokémons Favoritados, na URL / favorites, ao clicar no link Favorite Pokémons da barra de navegação.
-
-// Teste se a aplicação é redirecionada para a página Not Found ao entrar em uma URL desconhecida.
-
-// O que será verificado:
-
-//   Será avaliado se o arquivo teste App.test.js contemplam 100 % dos casos de uso criados pelo Stryker.
+test('test the text `Favorite`', () => {
+  const { getByText } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
+  const Favorite = getByText(/Favorite/i);
+  expect(Favorite).toBeInTheDocument();
+});
