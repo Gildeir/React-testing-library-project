@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAllByAltText, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 
@@ -27,8 +27,8 @@ describe('teste about', () => {
       <About />
     </Router>,
   );
-  const paragraphs = getAllByAltText(/Pokémons/i);
-  expect(paragraphs.length).toHaveLength(2);
+  const paragraphs = getAllByText(/Pokémons/i);
+  expect(paragraphs.length).toBe(2);
 
   test('Teste se a página contém a seguinte imagem de uma Pokédex', () => {});
   render(
