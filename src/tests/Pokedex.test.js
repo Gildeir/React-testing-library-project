@@ -37,17 +37,28 @@ describe('test about', () => {
   test('Teste se a Pokédex tem os botões de filtro',
     () => {
       RenderWithRouter(<App />);
-      const filterButton = screen.getAllByTestId('pokemon-type-button');
+      const filterButton = screen.getAllByTestId(/pokemon-type-button/i);
       expect(filterButton).toBeDefined();
     });
 
-  test('Teste se a Pokédex tem os botões de filtro',
+  test('Testar os tipos de botões',
+    () => {
+      const { getByText } = RenderWithRouter(<App />);
+      const pokemon = getByText('Pikachu');
+      expect(pokemon).toBeInTheDocument();
+      const nextButton = getByText('Fire');
+      fireEvent.click(nextButton);
+      const nextPokemon = getByText('Charmander');
+      expect(nextPokemon).toBeInTheDocument();
+    });
+
+  test('Teste se a Pokédex contém um botão para resetar o filtro',
     () => {
       const { getByRole } = RenderWithRouter(<App />);
       const endFilter = getByRole('button', {
         name: 'All',
       });
-      // fireEvent.click(endFilter);
+      fireEvent.click(endFilter);
       expect(endFilter).toBeInTheDocument();
     });
 });
